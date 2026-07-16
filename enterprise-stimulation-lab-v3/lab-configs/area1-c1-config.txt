@@ -1,0 +1,396 @@
+# area 1 
+# core switch 1
+
+building configuration...
+
+Current configuration : 11293 bytes
+!
+! Last configuration change at 02:14:21 UTC Wed Jul 15 2026 by admin
+!
+version 15.2
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+service compress-config
+!
+hostname area1-c1
+!
+boot-start-marker
+boot-end-marker
+!
+!
+enable secret 5 $1$MqfP$6f2FmJihtv5IKm7Rsh92F0
+!
+username admin privilege 15 secret 5 $1$3omF$3UgReGvdr3whCc1mpqH0G.
+username support privilege 5 secret 5 $1$mh8N$Yz95QjFXsabjYJxYwKk5Q.
+no aaa new-model
+!
+!         
+!
+!
+!
+!
+!
+!
+ip domain-name enterprise
+ip cef
+no ipv6 cef
+!
+!
+!
+spanning-tree mode rapid-pvst
+spanning-tree extend system-id
+spanning-tree vlan 10,20,30,99 priority 24576
+spanning-tree vlan 40,50,60 priority 28672
+!
+vlan internal allocation policy ascending
+!
+! 
+!
+!
+!         
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ ip address 1.1.1.1 255.255.255.255
+!
+interface Port-channel1
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 99
+ switchport mode trunk
+!
+interface Port-channel2
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 99
+ switchport mode trunk
+ spanning-tree guard root
+!         
+interface Port-channel3
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 99
+ switchport mode trunk
+ spanning-tree guard root
+!
+interface Port-channel4
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 99
+ switchport mode trunk
+ spanning-tree guard root
+!
+interface Port-channel10
+ no switchport
+ ip address 10.0.0.2 255.255.255.252
+!
+interface Port-channel20
+ no switchport
+ ip address 10.0.0.26 255.255.255.252
+!
+interface GigabitEthernet0/0
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 99
+ switchport mode trunk
+ media-type rj45
+ negotiation auto
+ channel-group 1 mode active
+!
+interface GigabitEthernet0/1
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 99
+ switchport mode trunk
+ media-type rj45
+ negotiation auto
+ channel-group 1 mode active
+!
+interface GigabitEthernet0/2
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 99
+ switchport mode trunk
+ media-type rj45
+ negotiation auto
+ channel-group 2 mode active
+!
+interface GigabitEthernet0/3
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 99
+ switchport mode trunk
+ media-type rj45
+ negotiation auto
+ channel-group 2 mode active
+!
+interface GigabitEthernet1/0
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 99
+ switchport mode trunk
+ media-type rj45
+ negotiation auto
+ channel-group 3 mode active
+!
+interface GigabitEthernet1/1
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 99
+ switchport mode trunk
+ media-type rj45
+ negotiation auto
+ channel-group 3 mode active
+!
+interface GigabitEthernet1/2
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 99
+ switchport mode trunk
+ media-type rj45
+ negotiation auto
+ channel-group 4 mode active
+!
+interface GigabitEthernet1/3
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 99
+ switchport mode trunk
+ media-type rj45
+ negotiation auto
+ channel-group 4 mode active
+!
+interface GigabitEthernet2/0
+ shutdown
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet2/1
+ shutdown
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet2/2
+ shutdown
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet2/3
+ shutdown
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet3/0
+ no switchport
+ no ip address
+ negotiation auto
+ channel-group 10 mode active
+!
+interface GigabitEthernet3/1
+ no switchport
+ no ip address
+ negotiation auto
+ channel-group 10 mode active
+!
+interface GigabitEthernet3/2
+ no switchport
+ no ip address
+ negotiation auto
+ channel-group 20 mode active
+!
+interface GigabitEthernet3/3
+ no switchport
+ no ip address
+ negotiation auto
+ channel-group 20 mode active
+!
+interface Vlan10
+ ip address 192.168.1.2 255.255.255.240
+ ip access-group HR in
+ ip helper-address 192.168.3.5 
+ standby 10 ip 192.168.1.1
+ standby 10 priority 110
+ standby 10 preempt
+!
+interface Vlan20
+ ip address 192.168.1.18 255.255.255.240
+ ip access-group IT in
+ ip helper-address 192.168.3.5 
+ standby 20 ip 192.168.1.17
+ standby 20 priority 110
+ standby 20 preempt
+!
+interface Vlan30
+ ip address 192.168.1.34 255.255.255.240
+ ip access-group MAN in
+ ip helper-address 192.168.3.5 
+ standby 30 ip 192.168.1.33
+ standby 30 priority 110
+ standby 30 preempt
+!
+interface Vlan40
+ ip address 192.168.1.50 255.255.255.240
+ ip access-group FINANCE in
+ ip helper-address 192.168.3.5 
+ standby 40 ip 192.168.1.49
+ standby 40 priority 90
+!
+interface Vlan50
+ ip address 192.168.1.66 255.255.255.240
+ ip access-group EMPLOYEES in
+ ip helper-address 192.168.3.5 
+ standby 50 ip 192.168.1.65
+ standby 50 priority 90
+!
+interface Vlan60
+ ip address 192.168.1.82 255.255.255.240
+ ip access-group GUESTS in
+ ip helper-address 192.168.3.5 
+ standby 60 ip 192.168.1.81
+ standby 60 priority 90
+!
+interface Vlan99
+ ip address 192.168.1.98 255.255.255.248
+ standby 99 ip 192.168.1.97
+ standby 99 priority 110
+ standby 99 preempt
+!
+router ospf 1
+ area 1 range 192.168.1.0 255.255.255.0
+ network 1.1.1.1 0.0.0.0 area 0
+ network 10.0.0.0 0.0.0.3 area 0
+ network 10.0.0.24 0.0.0.3 area 0
+ network 192.168.1.0 0.0.0.15 area 1
+ network 192.168.1.16 0.0.0.15 area 1
+ network 192.168.1.32 0.0.0.15 area 1
+ network 192.168.1.48 0.0.0.15 area 1
+ network 192.168.1.64 0.0.0.15 area 1
+ network 192.168.1.80 0.0.0.15 area 1
+ network 192.168.1.96 0.0.0.7 area 1
+!
+ip forward-protocol nd
+!
+no ip http server
+no ip http secure-server
+!
+!
+ip access-list extended EMPLOYEES
+ permit udp any any eq bootps
+ permit udp any any eq bootpc
+ deny   tcp 192.168.1.64 0.0.0.15 192.168.1.64 0.0.0.15 eq 22
+ deny   tcp 192.168.1.64 0.0.0.15 192.168.1.64 0.0.0.15 eq telnet
+ permit ip 192.168.1.64 0.0.0.15 192.168.1.64 0.0.0.15
+ permit icmp 192.168.1.64 0.0.0.15 192.168.2.64 0.0.0.15
+ permit icmp 192.168.1.64 0.0.0.15 192.168.1.16 0.0.0.15
+ deny   tcp 192.168.1.64 0.0.0.15 1.1.1.0 0.0.0.255 eq 22
+ permit tcp 192.168.1.64 0.0.0.15 192.168.1.16 0.0.0.15 established
+ deny   ip 192.168.1.64 0.0.0.15 192.168.1.0 0.0.0.255
+ deny   ip 192.168.1.64 0.0.0.15 192.168.2.0 0.0.0.255
+ permit ip 192.168.1.64 0.0.0.15 any
+ip access-list extended FINANCE
+ permit udp any any eq bootps
+ permit udp any any eq bootpc
+ deny   tcp 192.168.1.48 0.0.0.15 192.168.1.48 0.0.0.15 eq 22
+ deny   tcp 192.168.1.48 0.0.0.15 192.168.1.48 0.0.0.15 eq telnet
+ permit ip 192.168.1.48 0.0.0.15 192.168.1.48 0.0.0.15
+ permit icmp 192.168.1.48 0.0.0.15 192.168.2.48 0.0.0.15
+ permit icmp 192.168.1.48 0.0.0.15 192.168.1.16 0.0.0.15
+ deny   tcp 192.168.1.48 0.0.0.15 1.1.1.0 0.0.0.255 eq 22
+ permit tcp 192.168.1.48 0.0.0.15 192.168.1.16 0.0.0.15 established
+ deny   ip 192.168.1.48 0.0.0.15 192.168.1.0 0.0.0.255
+ deny   ip 192.168.1.48 0.0.0.15 192.168.2.0 0.0.0.255
+ permit ip 192.168.1.48 0.0.0.15 any
+ip access-list extended GUESTS
+ permit udp any any eq bootps
+ permit udp any any eq bootpc
+ deny   tcp 192.168.1.80 0.0.0.15 192.168.1.80 0.0.0.15 eq 22
+ deny   tcp 192.168.1.80 0.0.0.15 192.168.1.80 0.0.0.15 eq telnet
+ permit ip 192.168.1.80 0.0.0.15 192.168.1.80 0.0.0.15
+ permit icmp 192.168.1.80 0.0.0.15 192.168.1.16 0.0.0.15
+ deny   ip 192.168.1.80 0.0.0.15 192.168.1.0 0.0.0.255
+ deny   tcp 192.168.1.80 0.0.0.15 1.1.1.0 0.0.0.255 eq 22
+ deny   ip 192.168.1.80 0.0.0.15 192.168.2.0 0.0.0.255
+ permit ip 192.168.1.80 0.0.0.15 any
+ip access-list extended HR
+ permit udp any any eq bootps
+ permit udp any any eq bootpc
+ deny   tcp 192.168.1.0 0.0.0.15 192.168.1.0 0.0.0.15 eq 22
+ deny   tcp 192.168.1.0 0.0.0.15 192.168.1.0 0.0.0.15 eq telnet
+ permit ip 192.168.1.0 0.0.0.15 192.168.1.0 0.0.0.15
+ permit icmp 192.168.1.0 0.0.0.15 192.168.2.0 0.0.0.15
+ permit icmp 192.168.1.0 0.0.0.15 192.168.1.16 0.0.0.15
+ deny   tcp 192.168.1.0 0.0.0.15 1.1.1.0 0.0.0.255 eq 22
+ permit tcp 192.168.1.0 0.0.0.15 192.168.1.16 0.0.0.15 established
+ deny   ip 192.168.1.0 0.0.0.15 192.168.1.0 0.0.0.255
+ deny   ip 192.168.1.0 0.0.0.15 192.168.2.0 0.0.0.255
+ permit ip 192.168.1.0 0.0.0.15 any
+ip access-list extended IT
+ permit udp any any eq bootps
+ permit udp any any eq bootpc
+ permit ip 192.168.1.16 0.0.0.15 192.168.1.16 0.0.0.15
+ permit icmp 192.168.1.16 0.0.0.15 192.168.2.16 0.0.0.15
+ permit icmp 192.168.1.16 0.0.0.15 192.168.1.0 0.0.0.255
+ permit tcp 192.168.1.16 0.0.0.15 192.168.1.0 0.0.0.255
+ deny   ip 192.168.1.16 0.0.0.15 192.168.1.0 0.0.0.255
+ deny   ip 192.168.1.16 0.0.0.15 192.168.2.0 0.0.0.255
+ permit ip 192.168.1.16 0.0.0.15 any
+ip access-list extended MAN
+ permit udp any any eq bootps
+ permit udp any any eq bootpc
+ deny   tcp 192.168.1.32 0.0.0.15 192.168.1.32 0.0.0.15 eq 22
+ deny   tcp 192.168.1.32 0.0.0.15 192.168.1.32 0.0.0.15 eq telnet
+ permit ip 192.168.1.32 0.0.0.15 192.168.1.32 0.0.0.15
+ permit icmp 192.168.1.32 0.0.0.15 192.168.2.32 0.0.0.15
+ permit icmp 192.168.1.32 0.0.0.15 192.168.1.16 0.0.0.15
+ deny   tcp 192.168.1.32 0.0.0.15 1.1.1.0 0.0.0.255 eq 22
+ permit tcp 192.168.1.32 0.0.0.15 192.168.1.16 0.0.0.15 established
+ deny   ip 192.168.1.32 0.0.0.15 192.168.1.0 0.0.0.255
+ deny   ip 192.168.1.32 0.0.0.15 192.168.2.0 0.0.0.255
+ permit ip 192.168.1.32 0.0.0.15 any
+!
+!
+!
+!
+control-plane
+!
+privilege exec level 5 show ip interface brief
+privilege exec level 5 show ip interface
+privilege exec level 5 show ip
+privilege exec level 5 show
+banner exec ^C
+**************************************************************************
+* IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+* education. IOSv is provided as-is and is not supported by Cisco's      *
+* Technical Advisory Center. Any use or disclosure, in whole or in part, *
+* of the IOSv Software or Documentation to any third party for any       *
+* purposes is expressly prohibited except as otherwise authorized by     *
+* Cisco in writing.                                                      *
+**************************************************************************^C
+banner incoming ^C
+**************************************************************************
+* IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+* education. IOSv is provided as-is and is not supported by Cisco's      *
+* Technical Advisory Center. Any use or disclosure, in whole or in part, *
+* of the IOSv Software or Documentation to any third party for any       *
+* purposes is expressly prohibited except as otherwise authorized by     *
+* Cisco in writing.                                                      *
+**************************************************************************^C
+banner login ^C
+**************************************************************************
+* IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+* education. IOSv is provided as-is and is not supported by Cisco's      *
+* Technical Advisory Center. Any use or disclosure, in whole or in part, *
+* of the IOSv Software or Documentation to any third party for any       *
+* purposes is expressly prohibited except as otherwise authorized by     *
+* Cisco in writing.                                                      *
+**************************************************************************^C
+!
+line con 0
+ logging synchronous
+line aux 0
+line vty 0 4
+ login local
+ transport input ssh
+line vty 5 15
+ login local
+ transport input ssh
+!
+!
+end
+        
