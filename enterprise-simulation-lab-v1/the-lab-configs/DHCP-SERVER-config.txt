@@ -1,0 +1,52 @@
+ alpine Linux server 
+
+
+# dnsmasq configs -DHCP service
+
+
+interface=eth0                                                          
+                                                                        
+#area 1                                                                 
+                                                                        
+#HR Dep                                                                 
+                                                                        
+dhcp-range=set:a1-vlan10,192.168.1.10,192.168.1.20,255.255.255.224,12h  
+dhcp-option=tag:a1-vlan10,option:router,192.168.1.1                     
+                                                                        
+#IT Dep                                                                 
+                                                                        
+dhcp-range=set:a1-vlan20,192.168.1.40,192.168.1.50,255.255.255.224,12h    
+dhcp-option=tag:a1-vlan20,option:router,192.168.1.33                    
+                                                                        
+#FINANCE Dep                                                            
+                                                                                
+dhcp-range=set:a1-vlan30,192.168.1.70,192.168.1.80,255.255.255.224,12h  
+dhcp-option=tag:a1-vlan30,option:router,192.168.1.65                      
+                                                                        
+#EMPLOYEES Dep                                                               
+                                                                                
+dhcp-range=set:a1-vlan40,192.168.1.100,192.168.1.110,255.255.255.224,12h
+dhcp-option=tag:a1-vlan40,option:router,192.168.1.97                    
+                                                                        
+#area 2                                                                         
+                                                                        
+#HR Dep                                                                 
+                                                                        
+dhcp-range=set:a2-vlan10,192.168.2.10,192.168.2.20,255.255.255.224,12h  
+dhcp-option=tag:a2-vlan10,option:router,192.168.2.1                         
+                                                                         
+#IT Dep                                                                 
+                                                                                
+dhcp-range=set:a2-vlan20,192.168.2.40,192.168.2.50,255.255.255.224,12h     
+dhcp-option=tag:a2-vlan20,option:router,192.168.2.33                            
+                                                                        
+#FINANCE Dep                                                            
+                                                                        
+dhcp-range=set:a2-vlan30,192.168.2.70,192.168.2.80,255.255.255.224,12h  
+dhcp-option=tag:a2-vlan30,option:router,192.168.2.65                    
+                                                                        
+#EMPLOYEES Dep                                                          
+                                                                         
+dhcp-range=set:a2-vlan40,192.168.2.100,192.168.2.110,255.255.255.224,12h
+dhcp-option=tag:a2-vlan40,option:router,192.168.2.97   
+
