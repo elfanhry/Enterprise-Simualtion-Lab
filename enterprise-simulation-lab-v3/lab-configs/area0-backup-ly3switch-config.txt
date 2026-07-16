@@ -1,0 +1,260 @@
+#area 0
+# backup layer 3 switch
+
+
+Building configuration...
+
+Current configuration : 5728 bytes
+!
+! Last configuration change at 01:30:21 UTC Wed Jul 15 2026
+!
+version 15.2
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+service compress-config
+!
+hostname area0-c2
+!
+boot-start-marker
+boot-end-marker
+!
+!
+enable secret 5 $1$t6Vr$B6LJKikvCdMeRcxPd6Qe./
+!
+username admin privilege 15 secret 5 $1$wTUq$KpVNvlE4o/6S85gOOaWB8.
+username support privilege 5 secret 5 $1$ozaR$.XF5SRFz9LCX9mIwZ7j0p1
+no aaa new-model
+!
+!         
+!
+!
+!
+!
+!
+!
+ip domain-name enterprise
+ip cef
+no ipv6 cef
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+vlan internal allocation policy ascending
+!
+! 
+!
+!
+!
+!
+!         
+!
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ ip address 1.1.1.9 255.255.255.255
+!
+interface Port-channel18
+ no switchport
+ ip address 10.0.0.50 255.255.255.252
+!
+interface Port-channel20
+ no switchport
+ ip address 10.0.0.25 255.255.255.252
+!
+interface Port-channel21
+ no switchport
+ ip address 10.0.0.29 255.255.255.252
+!
+interface Port-channel22
+ no switchport
+ ip address 10.0.0.33 255.255.255.252
+!
+interface Port-channel23
+ no switchport
+ ip address 10.0.0.37 255.255.255.252
+!
+interface Port-channel24
+ no switchport
+ ip address 10.0.0.41 255.255.255.252
+!
+interface Port-channel25
+ no switchport
+ ip address 10.0.0.45 255.255.255.252
+!
+interface GigabitEthernet0/0
+ no switchport
+ no ip address
+ negotiation auto
+ channel-group 20 mode active
+!
+interface GigabitEthernet0/1
+ no switchport
+ no ip address
+ negotiation auto
+ channel-group 20 mode active
+!
+interface GigabitEthernet0/2
+ no switchport
+ no ip address
+ negotiation auto
+ channel-group 21 mode active
+!
+interface GigabitEthernet0/3
+ no switchport
+ no ip address
+ negotiation auto
+ channel-group 21 mode active
+!
+interface GigabitEthernet1/0
+ no switchport
+ no ip address
+ negotiation auto
+ channel-group 22 mode active
+!
+interface GigabitEthernet1/1
+ no switchport
+ no ip address
+ negotiation auto
+ channel-group 22 mode active
+!
+interface GigabitEthernet1/2
+ no switchport
+ no ip address
+ negotiation auto
+ channel-group 23 mode active
+!
+interface GigabitEthernet1/3
+ no switchport
+ no ip address
+ negotiation auto
+ channel-group 23 mode active
+!
+interface GigabitEthernet2/0
+ no switchport
+ no ip address
+ negotiation auto
+ channel-group 24 mode active
+!         
+interface GigabitEthernet2/1
+ no switchport
+ no ip address
+ negotiation auto
+ channel-group 24 mode active
+!
+interface GigabitEthernet2/2
+ no switchport
+ no ip address
+ shutdown
+ negotiation auto
+ channel-group 25 mode active
+!
+interface GigabitEthernet2/3
+ no switchport
+ no ip address
+ shutdown
+ negotiation auto
+ channel-group 25 mode active
+!
+interface GigabitEthernet3/0
+ no switchport
+ no ip address
+ negotiation auto
+ channel-group 18 mode active
+!
+interface GigabitEthernet3/1
+ no switchport
+ no ip address
+ negotiation auto
+ channel-group 18 mode active
+!
+interface GigabitEthernet3/2
+ no switchport
+ ip address 192.168.4.5 255.255.255.252
+ negotiation auto
+!
+interface GigabitEthernet3/3
+ no switchport
+ no ip address
+ shutdown
+ negotiation auto
+!
+router ospf 1
+ area 0 range 10.0.0.0 255.255.255.0
+ passive-interface GigabitEthernet3/2
+ network 1.1.1.9 0.0.0.0 area 0
+ network 10.0.0.20 0.0.0.3 area 0
+ network 10.0.0.24 0.0.0.3 area 0
+ network 10.0.0.28 0.0.0.3 area 0
+ network 10.0.0.32 0.0.0.3 area 0
+ network 10.0.0.36 0.0.0.3 area 0
+ network 10.0.0.40 0.0.0.3 area 0
+ network 10.0.0.44 0.0.0.3 area 0
+ network 10.0.0.48 0.0.0.3 area 0
+ default-information originate
+!
+ip forward-protocol nd
+!
+no ip http server
+no ip http secure-server
+!
+ip route 0.0.0.0 0.0.0.0 192.168.4.6
+!
+!
+!
+!
+!
+control-plane
+!
+privilege exec level 5 show ip interface brief
+privilege exec level 5 show ip interface
+privilege exec level 5 show ip
+privilege exec level 5 show
+banner exec ^C
+**************************************************************************
+* IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+* education. IOSv is provided as-is and is not supported by Cisco's      *
+* Technical Advisory Center. Any use or disclosure, in whole or in part, *
+* of the IOSv Software or Documentation to any third party for any       *
+* purposes is expressly prohibited except as otherwise authorized by     *
+* Cisco in writing.                                                      *
+**************************************************************************^C
+banner incoming ^C
+**************************************************************************
+* IOSv is strictly limited to 
+*Jul 15 02:35:44.377: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet1/0, changed state to upuse for evaluation, demonstration and IOS  *
+* education. IOSv is provided as-is and is not supported by Cisco's      *
+* Technical Advisory Center. Any use or disclosure, in whole or in part, *
+* of the IOSv Software or Documentation to any third party for any       *
+* purposes is expressly prohibited except as otherwise authorized by     *
+* Cisco in writing.                                                      *
+**************************************************************************^C
+banner login ^C
+**************************************************************************
+* IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+* education. IOSv is provided as-is and is not supported by Cisco's      *
+* Technical Advisory Center. Any use or disclosure, in whole or in part, *
+* of the IOSv Software or Documentation to any third party for any       *
+* purposes is expressly prohibited except as otherwise authorized by     *
+* Cisco in writing.                                                      *
+**************************************************************************^C
+!
+line con 0
+ logging synchronous
+line aux 0
+line vty 0 4
+ login local
+ transport input ssh
+line vty 5 15
+ login local
+ transport input ssh
+!
+!
+end
+
