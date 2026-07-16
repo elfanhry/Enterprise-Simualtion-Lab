@@ -114,7 +114,8 @@ Extended ACLs were implemented per department to enforce a Zero-Trust architectu
 Enterprise-Simualtion-Lab/
 ├── Enterprise-Lab-Finale.png            # Full topology (final version)
 ├── enterprise-simulation-lab-v1/
-│   └── lab-images/                      # V1 screenshots
+│   └── lab-images/    # V1 screenshots
+│   └── lab-configs                  
 ├── enterprise-simulation-lab-v2.pt1/
 │   └── v2-images/                       # V2 screenshots — Part 1
 ├── enterprise-simulation-lab-v2.p2/
